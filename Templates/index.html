@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Mars Data</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  
+  <style>
+
+		.alignCenter {
+			text-align: center;
+			}
+	
+		.marsDetails td {
+			background: lightgrey;
+			padding: 3px;
+			}
+	
+		.marsDetails th {
+			padding: 3px;
+			}
+	
+		.marsDetails tbody th {
+			display: none;
+			}
+	
+		.marsDetails thead th:first-child {
+			display: none;
+			}
+
+		@media only screen and (max-width: 800px) {
+  	body {
+    	background-color: rgb(233, 245, 181);
+  		}
+  
+  </style>
+
+</head>
+
+<body>
+	<div class="@media">
+  	<div class="container">
+    	<div class="jumbotron text-center">
+      	<h1>Mars Data</h1>
+      	<p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data for Mars</a></p>
+    	</div>    
+	
+			<div class="alert alert-danger fade in">
+				<h2 style='color: black'>Latest Mars News</h2> 
+			</div>
+    
+			<div class="row" id="Mars-listings">
+      	<div class="col-md-12" >
+        	<h3 class="heading">{{final_output.news_title}}</h3> 
+					<h4>{{final_output.news_para}}</h4>
+		
+					<hr>		  
+	      </div>
+	    </div>
+	  
+	    <div class="row" id="Mars-listings">
+				<div class="col-md-8"> 
+					<h2 style='color: black'>Featured Mars Image</h2> 
+			  	<img class="imgborder" src={{final_output.f_image_url}} alt="Max" style="width:100%;margin-right:15px";>
+			 	</div>
+		
+			  <div class="col-md-4"> 
+					<div class="alert alert-danger fade in">
+						<strong style='color: black'>Current Weather on Mars</strong> 
+					</div>
+			
+					<div class="alert alert-info fade in">
+						<p>{{final_output.weather}}</p>
+					</div>
+			
+					<div class='marsDetails' >
+						<div class="alert alert-danger fade in">
+							<strong style='color: black'>Mars Facts</strong> 
+						</div>
+				     
+						<p>{{final_output.facts|safe }}</p>
+					</div>
+				</div>
+			</div>  
+			
+			<br />
+	
+		<div class="row" >
+			<div class="col-md-12 alignCenter alert alert-danger fade in" >
+				<h2 style='color: black'>Mars Hemispheres</h2></div>
+			</div>
+	
+	 	<div class="row" >	
+			{% for name in final_output.hemi_images %}
+			<div class="col-md-6">
+				<h3>{{ name['title'] }}</h3> 
+				<p><img src={{ name['img_url'] }} alt="Max" style="width:100%;"></p>
+			</div>
+			{% endfor %}
+		</div>
+	</div>
+</body>
+
+</html>
+
